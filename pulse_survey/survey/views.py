@@ -8,7 +8,7 @@ from pulse_survey.survey.forms import FeedbackForm
 from pulse_survey.survey.models import Result, Feedback
 
 
-WELLBEING_RESPONSES = {"Agree", "Strongly agree", "Disagree", "Strongly disagree", "Neither agree nor disagree"}
+WELLBEING_RESPONSES = ["Strongly agree", "Agree", "Neither agree nor disagree", "Disagree", "Strongly disagree"]
 
 
 def index(request):
@@ -23,7 +23,7 @@ def team_view(request, session_id):
     errors = {}
     page_number = 1
     result, _ = Result.objects.get_or_create(session_id=session_id, page_number=page_number)
-    teams = {"Team A", "Team B", "Team C"}
+    teams = ["Team A", "Team B", "Team C"]
     chosen_team = None
     if result.data:
         chosen_team = result.data.get("team")
@@ -38,7 +38,7 @@ def location_view(request, session_id):
     errors = {}
     page_number = 2
     result, _ = Result.objects.get_or_create(session_id=session_id, page_number=page_number)
-    locations = {"London", "Manchester", "Glasgow", "York", "Bristol"}
+    locations = ["London", "Manchester", "Glasgow", "York", "Bristol"]
     chosen_location = None
     if result.data:
         chosen_location = result.data.get("location")
