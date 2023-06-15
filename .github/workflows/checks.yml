@@ -1,24 +1,28 @@
 name: GitHub checks
 
 on:
+  workflow_dispatch:
   push:
-    - "**"
 
 jobs:
-  check_web:
-    name: Check Python
-
+  build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
-
-    - name: Set up Python 3.8
+    - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
-        python-version: 3.8
-
+        python-version: '3.10'
     - name: Install Dependencies
       run: |
-        python3 -m pip install --upgrade pip setuptools
-        pip install -r requirements.lock
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Tests
+      run: |
+        python manage.py test
+    - name: Test coverage
+      run: |
+        pip install coverage
+        coverage run manage.py test
+        coverage report
+     # TOOO add Pylint to check code quality issues
