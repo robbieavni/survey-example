@@ -8,3 +8,4 @@ class FeedbackModelTest(TestCase):
         feedback = models.Feedback(email="Test@Example.Com", content="Some feedback")
         feedback.save()
         self.assertEqual(feedback.content, "Some feedback")
+        self.assertEqual(feedback.email, "test@example.com")
